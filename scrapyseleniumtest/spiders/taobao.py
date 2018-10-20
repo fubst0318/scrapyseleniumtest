@@ -17,7 +17,7 @@ class TaobaoSpider(Spider):
 
     def parse(self, response):
         prodcuts = response.xpath(
-            '//div[@id="mainsrp-itemlists"]//div[@class="items"][1]//div[contains(@class,"item")]')
+            '//div[@id="mainsrp-itemlist"]//div[@class="items"][1]//div[contains(@class,"item")]')
         for product in prodcuts:
             item = ProductItem()
             item['price'] = ''.join(product.xpath(
@@ -32,4 +32,5 @@ class TaobaoSpider(Spider):
                 './/div[contains(@class,"deal-cnt")]//text()').extract_first()
             item['location'] = product.xpath(
                 './/div[contains(@class,"location")]//text()').extract_first()
+            print('current item', item)
             yield item

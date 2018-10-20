@@ -20,9 +20,10 @@ class MongoPipeline(object):
     def open_spider(self, spider):
         self.client = pymongo.MongoClient(self.mongo_uri)
         self.db = self.client[self.mongo_db]
-        print(self.db)
+        print('当前的数据库链接:', self.db)
 
     def process_item(self, item, spider):
+        print('开始写入')
         self.db[item.collection].insert(dict(item))
         return item
 
